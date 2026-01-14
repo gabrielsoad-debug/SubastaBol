@@ -1,0 +1,124 @@
+{
+  "name": "Subastas Bolivia VIP",
+  "short_name": "SubastasBO",
+  "description": "Sistema de subastas en línea VIP para Bolivia. Participa en subastas exclusivas desde tu dispositivo móvil.",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"],
+  "background_color": "#0A0A14",
+  "theme_color": "#FFD700",
+  "orientation": "portrait",
+  "categories": ["business", "shopping", "finance"],
+  "lang": "es",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "icons": [
+     {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Ver Subastas",
+      "short_name": "Subastas",
+      "description": "Explora subastas en curso",
+      "url": "/#auctions",
+      "icons": [{ "src": "icons/icon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Mis Pujas",
+      "short_name": "Pujas",
+      "description": "Historial de mis pujas",
+      "url": "/#mybids",
+      "icons": [{ "src": "icons/icon-96x96.png", "sizes": "96x96", "type": "image/png" }]
+    },
+    {
+      "name": "Ver Subastas Activas",
+      "short_name": "Subastas",
+      "description": "Explora todas las subastas en curso",
+      "url": "/index.html#auctions",
+      "icons": [{ "src": "icons/shortcut-auctions.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Mis Pujas",
+      "short_name": "Mis Pujas",
+      "description": "Revisa tu historial de pujas",
+      "url": "/index.html#mybids",
+      "icons": [{ "src": "icons/shortcut-mybids.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Crear Subasta",
+      "short_name": "Crear",
+      "description": "Crea una nueva subasta",
+      "url": "/index.html?admin=create",
+      "icons": [{ "src": "icons/shortcut-create.png", "sizes": "96x96" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Subastas Bolivia en móvil"
+    },
+    {
+      "src": "screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Vista de escritorio de Subastas Bolivia"
+    },
+    {
+      "src": "screenshots/mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Vista móvil de Subastas Bolivia"
+    }
+  ],
+  "features": [
+    "Subastas en tiempo real",
+    "Sistema de pujas VIP",
+    "Verificación de productos",
+    "Seguimiento de subastas",
+    "Notificaciones push",
+    "Funcionamiento offline",
+    "Instalación como app"
+  ],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "auto"
+  },
+  "handle_links": "preferred",
+  "scope_extensions": [
+    {
+      "origin": "https://subastasbolivia.com"
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "web+subastas",
+      "url": "/index.html?url=%s"
+    }
+  ]
+}

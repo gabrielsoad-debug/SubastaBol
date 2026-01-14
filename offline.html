@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subastas Bolivia - Sin conexión</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0A0A14, #1A1A24);
+            color: #F0F0F0;
+            font-family: 'Segoe UI', -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        
+        .offline-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 40px 30px;
+            background: rgba(20, 20, 30, 0.95);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+        
+        .offline-icon {
+            font-size: 5rem;
+            color: #FFD700;
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        h1 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            color: #888;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+        
+        .message {
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 4px solid #FFD700;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: left;
+        }
+        
+        .message h3 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            border-color: #FFD700;
+        }
+        
+        .feature i {
+            font-size: 2.5rem;
+            color: #FFD700;
+            margin-bottom: 15px;
+        }
+        
+        .feature h4 {
+            color: #FFD700;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .feature p {
+            color: #AAA;
+            font-size: 0.9rem;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1rem;
+            min-width: 160px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700, #FF9800);
+            color: #0A0A14;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #8A2BE2;
+            color: #8A2BE2;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(138, 43, 226, 0.1);
+        }
+        
+        .connection-status {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(220, 20, 60, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(220, 20, 60, 0.3);
+        }
+        
+        .status-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .status-item i {
+            color: #FFD700;
+        }
+        
+        .retry-counter {
+            color: #FFD700;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 576px) {
+            .offline-container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .offline-icon {
+                font-size: 3.5rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                width: 100%;
+                min-width: auto;
+            }
+            
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+        
+        /* Safe areas para iOS */
+        @supports (padding: max(0px)) {
+            body {
+                padding: max(20px, env(safe-area-inset-top)) 
+                         max(20px, env(safe-area-inset-right))
+                         max(20px, env(safe-area-inset-bottom))
+                         max(20px, env(safe-area-inset-left));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            <i class="fas fa-wifi-slash"></i>
+        </div>
+        
+        <h1>Sin conexión a internet</h1>
+        <p class="subtitle">No podemos conectarnos al servidor de Subastas Bolivia</p>
+        
+        <div class="message">
+            <h3><i class="fas fa-info-circle"></i> ¿Qué puedes hacer?</h3>
+            <p>Verifica tu conexión a internet e intenta nuevamente. Mientras tanto, algunas funciones están disponibles offline.</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-eye"></i>
+                <h4>Ver Subastas</h4>
+                <p>Accede a subastas previamente cargadas</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-history"></i>
+                <h4>Mis Pujas</h4>
+                <p>Revisa tu historial de pujas local</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-sync-alt"></i>
+                <h4>Sincronizar</h4>
+                <p>Las pujas se enviarán al reconectar</p>
+            </div>
+        </div>
+        
+        <div class="connection-status">
+            <div class="status-item">
+                <i class="fas fa-wifi"></i>
+                <span id="connectionStatus">Estado: Desconectado</span>
+            </div>
+            <div class="status-item">
+                <i class="fas fa-clock"></i>
+                <span id="lastSync">Última conexión: --:--</span>
+            </div>
+            <div class="retry-counter" id="retryCounter">
+                Reintentando en: <span id="countdown">30</span>s
+            </div>
+        </div>
+        
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="retryConnection()">
+                <i class="fas fa-sync-alt"></i> Reintentar conexión
+            </button>
+            <button class="btn btn-secondary" onclick="viewCachedContent()">
+                <i class="fas fa-desktop"></i> Ver contenido offline
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Actualizar estado de conexión
+        function updateConnectionStatus() {
+            const statusEl = document.getElementById('connectionStatus');
+            const lastSyncEl = document.getElementById('lastSync');
+            
+            if (navigator.onLine) {
+                statusEl.innerHTML = '<i class="fas fa-check-circle" style="color: #4CAF50;"></i> Estado: Conectado';
+                window.location.href = '/';
+            } else {
+                statusEl.innerHTML = '<i class="fas fa-exclamation-circle" style="color: #DC143C;"></i> Estado: Desconectado';
+            }
+            
+            // Actualizar última sincronización
+            const now = new Date();
+            lastSyncEl.textContent = `Última conexión: ${now.toLocaleTimeString()}`;
+        }
+        
+        // Contador para reintentar
+        let countdown = 30;
+        const countdownEl = document.getElementById('countdown');
+        let countdownInterval;
+        
+        function startCountdown() {
+            clearInterval(countdownInterval);
+            countdown = 30;
+            
+            countdownInterval = setInterval(() => {
+                countdown--;
+                countdownEl.textContent = countdown;
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownInterval);
+                    retryConnection();
+                }
+            }, 1000);
+        }
+        
+        function retryConnection() {
+            console.log('Reintentando conexión...');
+            updateConnectionStatus();
+            
+            if (navigator.onLine) {
+                window.location.href = '/';
+            } else {
+                startCountdown();
+            }
+        }
+        
+        function viewCachedContent() {
+            // Intentar cargar la página principal del cache
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.controller.postMessage({
+                    type: 'GET_CACHE_INFO'
+                });
+            }
+            
+            // Mostrar mensaje
+            alert('Cargando contenido offline...');
+        }
+        
+        // Event listeners
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+        
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+            updateConnectionStatus();
+            startCountdown();
+            
+            // Mostrar última sincronización
+            const lastSync = localStorage.getItem('lastSync');
+            if (lastSync) {
+                document.getElementById('lastSync').textContent = `Última conexión: ${lastSync}`;
+            }
+        });
+        
+        // Guardar última sincronización cuando se reconecte
+        window.addEventListener('online', () => {
+            const now = new Date();
+            localStorage.setItem('lastSync', now.toLocaleTimeString());
+        });
+    </script>
+</body>
+</html>

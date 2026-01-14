@@ -1,0 +1,35 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /config.js
+
+Sitemap: https://subastasbolivia.com/sitemap.xml
+
+# Reglas específicas para motores de búsqueda
+User-agent: Googlebot
+Allow: /subasta/
+Allow: /categoria/
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 3
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 5
+
+# Bloquear crawlers problemáticos
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
